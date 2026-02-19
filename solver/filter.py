@@ -1,12 +1,13 @@
 from .scoring import score
 
 # 候補をフィルタリングする関数
-def filter_candidates(candidates, guess, result):
+def filter_candidates(candidates, guess, hit, blow):
     filtered = []
 
     # 各候補に対してスコアを計算し、結果と一致するものだけを残す
     for candidate in candidates:
-        if score(candidate, guess) == result:
+        h, b = score(candidate, guess)
+        if h == hit and b == blow:
             filtered.append(candidate)
 
     return filtered
