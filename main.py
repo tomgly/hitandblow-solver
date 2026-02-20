@@ -1,4 +1,4 @@
-from solver.config import COLORS, CODE_LEN
+from solver.config import COLORS, CODE_LEN, MANUAL_INPUT
 from solver.generator import generate_all_codes
 from solver.filter import filter_candidates
 from solver.strategy import suggest_best_guess
@@ -42,12 +42,16 @@ def main():
 
         # 候補が1つ以下になったら終了
         if len(candidates) == 1:
-            print("正解:", candidates[0])
+            print("正解: ", candidates[0])
             break
 
         # 次の推測を提案
-        guess = suggest_best_guess(candidates)
-        print(f"次の推測: {guess}")
+        suggest = suggest_best_guess(candidates)
+        print(f"次の推測: {suggest}")
+        if not MANUAL_INPUT:
+            guess = suggest
+        else:
+            guess = None
 
 if __name__ == "__main__":
     main()
